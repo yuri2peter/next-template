@@ -22,12 +22,19 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about this template, take a look at the following resources:
 
+- [React Libraries for 2024](https://www.robinwieruch.de/react-libraries/) - a list of React libraries for 2024.
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Tailwind CSS](https://tailwindcss.com/docs) - a utility-first CSS framework for rapidly building custom designs.
+- [Shadcn UI](https://ui.shadcn.com/docs) - a library of components for building modern web applications.
+- [usehooks.com](https://usehooks.com/) - a collection of React hooks.
+- [Zod](https://zod.dev/) - a TypeScript-first schema validation library.
+- [immer](https://immerjs.github.io/immer/) - a library for managing state immutability.
+- [Zustand](https://github.com/pmndrs/zustand?tab=readme-ov-file) - a state management library for React.
+- [Reselect](https://reselect.js.org/) - a library for creating memoized selectors for Redux.
+- [lodash](https://lodash.com/) - a library for JavaScript utility functions.
 
 ## Deploy on Vercel
 
