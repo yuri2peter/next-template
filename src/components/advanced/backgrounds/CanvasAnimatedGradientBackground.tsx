@@ -10,6 +10,7 @@ export interface Params {
   g2?: number;
   b1?: number;
   b2?: number;
+  speed?: number; // 1 ~ 5
 }
 
 export default function CanvasAnimatedGradientBackground({
@@ -19,6 +20,7 @@ export default function CanvasAnimatedGradientBackground({
   g2 = 256,
   b1 = 192,
   b2 = 256,
+  speed = 3,
 }: Params) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
@@ -70,7 +72,7 @@ export default function CanvasAnimatedGradientBackground({
           fillColor(x, y, R(x, y, time), G(x, y, time), B(x, y, time));
         }
       }
-      time = time + 0.03;
+      time = time + speed * 0.01;
       requestAnimationFrame(startAnimation);
     };
 
@@ -78,7 +80,7 @@ export default function CanvasAnimatedGradientBackground({
     return () => {
       running = false;
     };
-  }, [r1, r2, g1, g2, b1, b2]);
+  }, [r1, r2, g1, g2, b1, b2, speed]);
   return (
     <canvas width={32} height={32} ref={canvasRef} className="w-full h-full" />
   );
@@ -91,11 +93,28 @@ export function CanvasAnimatedGradientBackgroundControls({
   value: Params;
   onChange: (value: Params) => void;
 }) {
-  const { r1 = 192, r2 = 256, g1 = 192, g2 = 256, b1 = 192, b2 = 256 } = value;
+  const {
+    r1 = 192,
+    r2 = 256,
+    g1 = 192,
+    g2 = 256,
+    b1 = 192,
+    b2 = 256,
+    speed = 3,
+  } = value;
   return (
     <div className="flex flex-col gap-2">
       <div className="flex gap-2">
-        <span>R</span>
+        <span>Speed: </span>
+        <Slider
+          min={1}
+          max={5}
+          value={[speed]}
+          onValueChange={(range) => onChange({ ...value, speed: range[0] })}
+        />
+      </div>
+      <div className="flex gap-2">
+        <span>R: </span>
         <Slider
           min={0}
           max={256}
@@ -106,7 +125,7 @@ export function CanvasAnimatedGradientBackgroundControls({
         />
       </div>
       <div className="flex gap-2">
-        <span>G</span>
+        <span>G: </span>
         <Slider
           min={0}
           max={256}
@@ -117,7 +136,7 @@ export function CanvasAnimatedGradientBackgroundControls({
         />
       </div>
       <div className="flex gap-2">
-        <span>B</span>
+        <span>B: </span>
         <Slider
           min={0}
           max={256}
