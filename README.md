@@ -34,7 +34,10 @@ To learn more about this template, take a look at the following resources:
 - [immer](https://immerjs.github.io/immer/) - a library for managing state immutability.
 - [Zustand](https://github.com/pmndrs/zustand?tab=readme-ov-file) - a state management library for React.
 - [Reselect](https://reselect.js.org/) - a library for creating memoized selectors for Redux.
-- [lodash](https://lodash.com/) - a library for JavaScript utility functions.
+- [radash](https://radash-docs.vercel.app/) - a library of functional programming utilities.
+- [Lucide](https://lucide.dev/icons/) - a library of icons for React.
+- [Shadcn Blocks](https://www.shadcnblocks.com/) - a premium collection of marketing blocks designed for Shadcn UI, Tailwind, and React.
+- [shadcn/ui ++](https://jidefr.medium.com/shadcn-ui-add-components-and-resources-0846b0f57596) - shadcn/ui additional components and resources
 
 ## Deploy on Vercel
 
