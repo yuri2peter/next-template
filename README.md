@@ -31,6 +31,7 @@ To learn more about this template, take a look at the following resources:
 - [Shadcn UI](https://ui.shadcn.com/docs) - a library of components for building modern web applications.
 - [usehooks.com](https://usehooks.com/) - a collection of React hooks.
 - [Zod](https://zod.dev/) - a TypeScript-first schema validation library.
+- [Get Started](https://react-hook-form.com/get-started) - Performant, flexible and extensible forms with easy-to-use validation.
 - [immer](https://immerjs.github.io/immer/) - a library for managing state immutability.
 - [Zustand](https://github.com/pmndrs/zustand?tab=readme-ov-file) - a state management library for React.
 - [Reselect](https://reselect.js.org/) - a library for creating memoized selectors for Redux.

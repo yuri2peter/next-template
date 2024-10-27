@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Toaster } from '@/components/ui/toaster';
 import { enableMapSet } from 'immer';
 import dayjs from 'dayjs';
 import isLeapYear from 'dayjs/plugin/isLeapYear';
@@ -40,6 +41,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.className} ${geistMono.className} antialiased`}
       >
+        <Toaster />
         {children}
       </body>
     </html>
