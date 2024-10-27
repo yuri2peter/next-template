@@ -61,11 +61,11 @@ body {
     }
 
     :hover::-webkit-scrollbar {
-      @apply bg-black/10;
+      @apply bg-gray-300;
     }
 
     :hover::-webkit-scrollbar-thumb {
-      @apply bg-black/20;
+      @apply bg-gray-500;
     }
   }
   .dark {
@@ -103,11 +103,11 @@ body {
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     :hover::-webkit-scrollbar {
-      @apply bg-white/10;
+      @apply bg-gray-700;
     }
 
     :hover::-webkit-scrollbar-thumb {
-      @apply bg-white/20;
+      @apply bg-gray-500;
     }
   }
 }

@@ -17,7 +17,15 @@ export default function MarkdownPreview({
     <Markdown
       className={'prose prose-pre:p-0' + className}
       remarkPlugins={[remarkGfm, remarkMath]}
-      rehypePlugins={[rehypeKatex, rehypeHighlight]}
+      rehypePlugins={[
+        rehypeKatex,
+        [
+          rehypeHighlight,
+          {
+            detect: true,
+          },
+        ],
+      ]}
     >
       {children}
     </Markdown>

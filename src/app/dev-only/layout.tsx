@@ -9,7 +9,7 @@ export default function DevOnlyLayout({
 }) {
   devOnly();
   return (
-    <div className="p-4 pt-12 mx-auto max-w-screen-md flex flex-col gap-8">
+    <div className="p-4 pt-12 mx-auto max-w-screen-xl flex flex-col gap-8">
       <DevOnlyNavLinks />
       <div className="flex gap-12 items-start">
         <Menu />
