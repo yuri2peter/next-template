@@ -17,8 +17,11 @@ export default function NotFound() {
             </Link>{' '}
             page or{' '}
             <Link
-              href="javascript:void(0)"
-              onClick={() => router.back()}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                router.back();
+              }}
               className="text-blue-500 underline"
             >
               go back

@@ -11,7 +11,7 @@ export default function DevOnlyLayout({
   return (
     <div className="p-4 pt-12 mx-auto max-w-screen-md flex flex-col gap-8">
       <DevOnlyNavLinks />
-      <div className="flex gap-12">
+      <div className="flex gap-12 items-start">
         <Menu />
         {children}
       </div>

@@ -20,8 +20,11 @@ export default function Error({
             </a>{' '}
             page or{' '}
             <Link
-              href="javascript:void(0)"
-              onClick={reset}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                reset();
+              }}
               className="text-blue-500 underline"
             >
               try again

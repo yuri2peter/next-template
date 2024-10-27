@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 export default function Menu() {
   const pathname = usePathname();
   return (
-    <ul className="border-r border-gray-200 p-4 pl-0">
+    <ul className="p-4 pl-0">
       {links.map((link) => {
         const fullPath = `/dev-only/${link.subPath}`;
         const isActive = pathname === fullPath;
