@@ -6,6 +6,9 @@ export const DataSchema = z.object({
   }),
   email: z.string().email(),
   gender: z.enum(['male', 'female']),
+  agree: z.boolean().refine((v) => v, {
+    message: 'You must agree to the terms and conditions.',
+  }),
 });
 
 export type Data = z.infer<typeof DataSchema>;

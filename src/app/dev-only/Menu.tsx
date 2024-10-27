@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { links } from './defines';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 export default function Menu() {
   const pathname = usePathname();
@@ -14,15 +15,18 @@ export default function Menu() {
         const isActive = pathname === fullPath;
         return (
           <li key={link.subPath}>
-            <Link
-              href={fullPath}
-              className={cn(
-                'block p-1 hover:bg-gray-100 rounded-md',
-                isActive ? 'text-blue-500' : ''
-              )}
+            <Button
+              asChild
+              variant={'linkHover2'}
+              className="w-full justify-start"
             >
-              {link.label}
-            </Link>
+              <Link
+                href={fullPath}
+                className={cn({ 'text-blue-500': isActive })}
+              >
+                {link.label}
+              </Link>
+            </Button>
           </li>
         );
       })}

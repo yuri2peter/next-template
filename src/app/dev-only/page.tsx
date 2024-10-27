@@ -4,10 +4,13 @@ export const metadata = {
 
 export default function Wip() {
   return (
-    <>
-      <main>
-        <h1>WIP</h1>
-      </main>
-    </>
+    <main className="prose flex flex-col">
+      <h2>Dev Only</h2>
+      <p>Playground for development.</p>
+      <blockquote>
+        This page is only available in development mode. It is not available in
+        production.
+      </blockquote>
+    </main>
   );
 }

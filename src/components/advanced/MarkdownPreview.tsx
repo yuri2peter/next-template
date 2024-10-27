@@ -5,6 +5,7 @@ import remarkMath from 'remark-math';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
 import 'katex/dist/katex.min.css';
+import { cn } from '@/lib/utils';
 
 export default function MarkdownPreview({
   children,
@@ -15,7 +16,7 @@ export default function MarkdownPreview({
 }) {
   return (
     <Markdown
-      className={'prose prose-pre:p-0' + className}
+      className={cn('prose', 'prose-pre:p-0', className)}
       remarkPlugins={[remarkGfm, remarkMath]}
       rehypePlugins={[
         rehypeKatex,
