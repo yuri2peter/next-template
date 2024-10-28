@@ -7,7 +7,7 @@ import CanvasAnimatedGradientBackground, {
 import Head from 'next/head';
 import { useState } from 'react';
 
-export default function ClientComponent() {
+export default function PageContent() {
   const [value, setValue] = useState<Params>({});
   return (
     <>

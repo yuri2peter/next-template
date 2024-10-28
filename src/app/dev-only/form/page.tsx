@@ -1,9 +1,9 @@
-import ClientComponent from './ClientComponent';
+import PageContent from './PageContent';
 
 export const metadata = {
   title: 'Form',
 };
 
 export default function Page() {
-  return <ClientComponent />;
+  return <PageContent />;
 }

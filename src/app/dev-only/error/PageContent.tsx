@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
-export default function ClientComponent() {
+export default function PageContent() {
   const [error, setError] = useState('');
   if (error) {
     throw new Error(error);

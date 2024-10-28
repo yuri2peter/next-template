@@ -1,6 +1,6 @@
 'use client';
 
-export default function ClientComponent() {
+export default function PageContent() {
   return (
     <main className="prose flex flex-col">
       <h2>Page Template</h2>

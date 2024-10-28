@@ -39,6 +39,7 @@ To learn more about this template, take a look at the following resources:
 - [Lucide](https://lucide.dev/icons/) - a library of icons for React.
 - [Shadcn Blocks](https://www.shadcnblocks.com/) - a premium collection of marketing blocks designed for Shadcn UI, Tailwind, and React.
 - [shadcn/ui ++](https://jidefr.medium.com/shadcn-ui-add-components-and-resources-0846b0f57596) - shadcn/ui additional components and resources
+- [swr](https://swr.vercel.app/) - a library for data fetching with React.
 
 ## Deploy on Vercel
 

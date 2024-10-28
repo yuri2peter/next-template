@@ -17,7 +17,7 @@ import Head from 'next/head';
 import React, { useRef } from 'react';
 import { useImmer } from 'use-immer';
 
-export default function ClientComponent() {
+export default function PageContent() {
   const refChatLogsBox = useRef(null);
   const [value, setValue] = useImmer({
     prompt: '',

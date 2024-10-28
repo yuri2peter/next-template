@@ -22,7 +22,7 @@ import MarkdownPreview from '@/components/advanced/MarkdownPreview';
 import { useToast } from '@/hooks/use-toast';
 import { Checkbox } from '@/components/ui/checkbox';
 
-export default function ClientComponent() {
+export default function PageContent() {
   const [result, setResult] = useState('Waiting for submit...');
   const [loading, setLoading] = useState(false);
   const form = useForm<Data>({

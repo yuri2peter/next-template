@@ -7,7 +7,7 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 import defaultText from './defaultText.md';
 
-export default function ClientComponent() {
+export default function PageContent() {
   const [value, setValue] = useState(defaultText);
   return (
     <>
