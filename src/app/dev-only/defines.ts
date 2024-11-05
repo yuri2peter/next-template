@@ -1,7 +1,7 @@
 export const links = [
   { label: 'Template', subPath: 'template' },
   { label: 'Form', subPath: 'form' },
-  { label: 'Markdown', subPath: 'markdown' },
+  { label: 'MD Preview', subPath: 'md-preview' },
   { label: 'AI Chat', subPath: 'aichat' },
   { label: 'Upload', subPath: 'upload' },
   { label: 'Background', subPath: 'background' },
