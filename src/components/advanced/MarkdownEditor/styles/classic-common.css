@@ -44,6 +44,10 @@ div[data-milkdown-root='true'] {
       background: var(--crepe-color-selected);
     }
 
+    img {
+      @apply rounded-lg border border-primary/10;
+    }
+
     li.ProseMirror-selectednode {
       background: var(--crepe-color-selected);
       outline: none;

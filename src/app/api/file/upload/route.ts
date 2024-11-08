@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
 
   Readable.fromWeb(req.body as ReadableStream).pipe(bb); // .fromWeb() method
 
-  return new Promise((resolve) => {
+  return new Promise<NextResponse>((resolve) => {
     bb.on('close', () => {
       if (!result.filename) {
         resolve(

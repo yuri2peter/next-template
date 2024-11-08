@@ -6,9 +6,12 @@
   milkdown-code-block {
     display: block;
     position: relative;
-    padding: 8px 20px 20px;
     background: var(--crepe-color-surface);
     margin: 4px 0;
+
+    .codemirror-host {
+      @apply overflow-hidden rounded-lg border border-primary/10;
+    }
 
     .language-picker {
       padding-top: 10px;
