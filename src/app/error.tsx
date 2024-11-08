@@ -15,9 +15,9 @@ export default function Error({
         <div className="flex gap-4">
           <p>
             You can go back to the{' '}
-            <a href="/" className="text-blue-500 underline">
+            <Link href="/" className="text-blue-500 underline">
               home
-            </a>{' '}
+            </Link>{' '}
             page or{' '}
             <Link
               href="#"
