@@ -24,7 +24,7 @@ import {
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/react';
 import { trailing } from '@milkdown/kit/plugin/trailing';
 import { placeholderConfig, placeholderPlugin } from './features/placeholder';
-import { defineCodeMirrorFeature } from './features/codemirror';
+import { defineCodeMirrorFeature } from './features/codemirror/defineCodeMirrorFeature';
 import { defineLinkTooltipFeature } from './features/linkTooltip';
 import { defineListItemFeature } from './features/listItem';
 import { defineTableFeature } from './features/table';

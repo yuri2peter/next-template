@@ -11,11 +11,13 @@ export const uploadIcon = html`
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="icon icon-tabler icons-tabler-outline icon-tabler-upload"
+    class="lucide lucide-image-up"
   >
-    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-    <path d="M7 9l5 -5l5 5" />
-    <path d="M12 4l0 12" />
+    <path
+      d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21"
+    />
+    <path d="m14 19.5 3-3 3 3" />
+    <path d="M17 22v-5.5" />
+    <circle cx="9" cy="9" r="2" />
   </svg>
 `;

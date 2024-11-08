@@ -24,6 +24,7 @@ import {
   tableIcon,
   textIcon,
   todoListIcon,
+  imageIcon,
 } from '../../icons';
 import type { MenuItemGroup } from './utils';
 import {
@@ -34,7 +35,6 @@ import {
   clearRange,
 } from './utils';
 import { GroupBuilder } from './group-builder';
-import { uploadIcon } from '../../icons/upload';
 import { selectFileFromBrowser, uploadFile } from '@/lib/file';
 import { getNodeByUploadedFile } from '../upload';
 
@@ -206,7 +206,7 @@ export function getGroups(filter?: string) {
     })
     .addItem('upload', {
       label: 'Upload',
-      icon: uploadIcon,
+      icon: imageIcon,
       onRun: async (ctx) => {
         const view = ctx.get(editorViewCtx);
         const { dispatch, state } = view;

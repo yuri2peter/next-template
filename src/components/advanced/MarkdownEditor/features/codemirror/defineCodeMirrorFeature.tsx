@@ -4,11 +4,11 @@ import {
 } from '@milkdown/kit/component/code-block';
 import { basicSetup } from 'codemirror';
 import { keymap } from '@codemirror/view';
-import { coolGlow } from 'thememirror';
 import { languages } from '@codemirror/language-data';
 import { defaultKeymap, indentWithTab } from '@codemirror/commands';
 import { Editor } from '@milkdown/kit/core';
-import { chevronDownIcon, clearIcon, searchIcon } from '../icons';
+import { chevronDownIcon, clearIcon, searchIcon } from '../../icons';
+import { colorfulNight } from './theme';
 
 export function defineCodeMirrorFeature(editor: Editor) {
   editor
@@ -18,7 +18,7 @@ export function defineCodeMirrorFeature(editor: Editor) {
         extensions: [
           keymap.of(defaultKeymap.concat(indentWithTab)),
           basicSetup,
-          coolGlow,
+          colorfulNight,
         ],
         languages,
         clearSearchIcon: () => clearIcon,
