@@ -1,7 +1,7 @@
 import PageContent from './PageContent';
 import fs from 'fs';
 export const metadata = {
-  title: 'Markdown Preview',
+  title: 'Markdown Editor',
 };
 
 export default function Page() {

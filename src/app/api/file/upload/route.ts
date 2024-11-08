@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
   }
   const bb = busboy({
     headers: Object.fromEntries(req.headers),
+    defCharset: 'utf8',
   });
 
   const result: {
@@ -38,7 +39,8 @@ export async function POST(req: NextRequest) {
   };
 
   bb.on('file', (name, file, info) => {
-    const filename = info.filename;
+    // somehow the filename is encoded in latin1
+    const filename = Buffer.from(info.filename, 'latin1').toString('utf8');
     const extname = path.extname(filename);
     const basename = path.basename(filename, extname);
     const newFilename = `${basename}-${shortId()}${extname}`;

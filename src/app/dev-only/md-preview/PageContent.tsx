@@ -5,10 +5,13 @@ import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import Head from 'next/head';
 import React, { useState } from 'react';
-import defaultText from './defaultText.md';
 
-export default function PageContent() {
-  const [value, setValue] = useState(defaultText);
+export default function PageContent({
+  defaultValue,
+}: {
+  defaultValue: string;
+}) {
+  const [value, setValue] = useState(defaultValue);
   return (
     <>
       <Head>

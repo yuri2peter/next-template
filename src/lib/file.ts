@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { saveAs } from 'file-saver';
+import { z } from 'zod';
 
 export function exportFile(dataStr: string, name = 'data.txt') {
   const file = new File([dataStr], name, {
@@ -83,4 +85,30 @@ export function selectFileFromBrowser(
     };
     elInput.click();
   });
+}
+
+export async function uploadFile({
+  file,
+  abortController,
+  onProgressChange,
+}: {
+  file: File;
+  abortController?: AbortController;
+  onProgressChange?: (progressPercent: number) => void;
+}) {
+  const formData = new FormData();
+  formData.append('file', file);
+  const { data } = await axios.post('/api/file/upload', formData, {
+    signal: abortController?.signal,
+    onUploadProgress: ({ loaded, total }) => {
+      const progress = loaded / (total || 1);
+      onProgressChange?.(progress);
+    },
+  });
+  return z
+    .object({
+      filename: z.string(),
+      url: z.string(),
+    })
+    .parse(data);
 }

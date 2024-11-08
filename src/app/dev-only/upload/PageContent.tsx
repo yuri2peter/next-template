@@ -2,11 +2,10 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { selectFileFromBrowser } from '@/lib/file';
+import { selectFileFromBrowser, uploadFile } from '@/lib/file';
 import { cn } from '@/lib/utils';
 import { Loader2, Upload } from 'lucide-react';
 import { useImmer } from 'use-immer';
-import axios from 'axios';
 
 export default function PageContent() {
   const [state, setState] = useImmer({
@@ -62,8 +61,14 @@ function Dropzone({
     const acceptFile = onShouldUpload(file);
     if (!acceptFile) return;
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      uploadFile({
+        file,
+        onProgressChange: (progress) => {
+          setState((draft) => {
+            draft.progress = progress;
+          });
+        },
+      });
       const abortController = new AbortController();
       setState((draft) => {
         draft.uploading = true;
@@ -71,12 +76,10 @@ function Dropzone({
         draft.filesize = file.size;
         draft.abortController = abortController;
       });
-      const {
-        data: { filename, url },
-      } = await axios.post('/api/file/upload', formData, {
-        signal: abortController.signal,
-        onUploadProgress: ({ loaded, total }) => {
-          const progress = (loaded / (total || 1)) * 100;
+      const { filename, url } = await uploadFile({
+        file,
+        abortController,
+        onProgressChange: (progress) => {
           setState((draft) => {
             draft.progress = progress;
           });
@@ -138,7 +141,7 @@ function Dropzone({
       {state.uploading ? (
         <>
           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-          {state.progress.toFixed(2)}% Click to cancel
+          {(state.progress * 100).toFixed(2)}% Click to cancel
         </>
       ) : (
         <>
