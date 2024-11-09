@@ -35,8 +35,8 @@ import {
   clearRange,
 } from './utils';
 import { GroupBuilder } from './group-builder';
-import { selectFileFromBrowser, uploadFile } from '@/lib/file';
-import { getNodeByUploadedFile } from '../upload';
+import openUploadModal from '../uploadModal';
+import { getNodeByUploadedFile } from '../../utils';
 
 export function getGroups(filter?: string) {
   const groupBuilder = new GroupBuilder();
@@ -205,23 +205,23 @@ export function getGroups(filter?: string) {
       },
     })
     .addItem('upload', {
-      label: 'Upload',
+      label: 'Image & File',
       icon: imageIcon,
-      onRun: async (ctx) => {
+      onRun: (ctx) => {
         const view = ctx.get(editorViewCtx);
         const { dispatch, state } = view;
         const schema = ctx.get(schemaCtx);
-        const file = await selectFileFromBrowser(false);
-        const { filename, url } = await uploadFile({ file });
-        const node = getNodeByUploadedFile({
-          originalName: file.name,
-          isImage: file.type.startsWith('image'),
-          uploadedName: filename,
-          url,
-          schema,
+        openUploadModal(({ name, url, isImage }) => {
+          const node = getNodeByUploadedFile({
+            originalName: name,
+            isImage,
+            uploadedName: name,
+            url,
+            schema,
+          });
+          const command = clearContentAndAddNode(node);
+          command(state, dispatch);
         });
-        const command = clearContentAndAddNode(node);
-        command(state, dispatch);
       },
     });
 

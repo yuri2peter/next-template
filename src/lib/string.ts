@@ -100,3 +100,19 @@ export function getFileExtension(fileName: string) {
   // 从最后一个"."之后截取字符串
   return fileName.substring(dotIndex + 1);
 }
+
+export function checkIsImageUrl(url: string) {
+  const checkList = [
+    '.png',
+    '.jpg',
+    '.jpeg',
+    '.gif',
+    '.bmp',
+    '.webp',
+    '.svg',
+    '.ico',
+    '.tiff',
+    '.tif',
+  ];
+  return checkList.some((t) => url.endsWith(t));
+}

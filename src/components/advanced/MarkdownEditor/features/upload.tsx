@@ -1,7 +1,8 @@
 import { upload, uploadConfig } from '@milkdown/kit/plugin/upload';
 import { Editor } from '@milkdown/kit/core';
 import { uploadFile } from '@/lib/file';
-import { Node, Schema } from '@milkdown/kit/prose/model';
+import { Node } from '@milkdown/kit/prose/model';
+import { getNodeByUploadedFile } from '../utils';
 
 export function defineUploadFeature(editor: Editor) {
   editor
@@ -27,32 +28,4 @@ export function defineUploadFeature(editor: Editor) {
       }));
     })
     .use(upload);
-}
-
-export function getNodeByUploadedFile({
-  originalName,
-  isImage,
-  uploadedName,
-  url,
-  schema,
-}: {
-  originalName: string;
-  isImage: boolean;
-  uploadedName: string;
-  url: string;
-  schema: Schema;
-}) {
-  if (isImage) {
-    return schema.node('image', {
-      src: url,
-      alt: uploadedName,
-    });
-  } else {
-    return schema.text(originalName, [
-      schema.marks.link.create({
-        title: originalName,
-        href: url,
-      }),
-    ]);
-  }
 }

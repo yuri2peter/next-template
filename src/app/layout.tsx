@@ -8,6 +8,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import duration from 'dayjs/plugin/duration';
 // import 'dayjs/locale/zh-cn';
 import './globals.css';
+import { RootLayerRenderer } from '@/components/ui/rootLayer';
 
 enableMapSet();
 dayjs.extend(relativeTime);
@@ -42,6 +43,7 @@ export default function RootLayout({
         className={`${geistSans.className} ${geistMono.className} antialiased`}
       >
         <Toaster />
+        <RootLayerRenderer />
         {children}
       </body>
     </html>

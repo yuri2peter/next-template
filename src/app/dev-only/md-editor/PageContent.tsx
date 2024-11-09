@@ -18,7 +18,7 @@ export default function PageContent({
     markdown: defaultValue,
   });
   return (
-    <main className="flex flex-row gap-4 w-full h-[640px] pr-12 overflow-auto ">
+    <main className="flex flex-row gap-4 w-full h-[calc(100vh-128px)] pr-12 overflow-auto ">
       <div className="overflow-auto h-full grow">
         <DynamicMarkdownEditor
           defaultValue={defaultValue}
