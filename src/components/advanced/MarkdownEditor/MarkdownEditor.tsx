@@ -75,15 +75,16 @@ const MilkdownEditor = ({
           ...prev,
           editable: () => !refProps.current.readonly,
         }));
-        const handleChangeDebounced = debounce(
-          { delay: refProps.current.onChangeDebounceDelay ?? 500 },
-          (text: string) => {
+        const handleChangeFixed = (() => {
+          const delay = refProps.current.onChangeDebounceDelay ?? 0;
+          const handleChange = (text: string) => {
             refProps.current.onChange?.(text);
-          }
-        );
+          };
+          return delay > 0 ? debounce({ delay }, handleChange) : handleChange;
+        })();
         ctx.get(listenerCtx).markdownUpdated((_ctx, markdown, prevMarkdown) => {
           if (markdown !== prevMarkdown) {
-            handleChangeDebounced(markdown);
+            handleChangeFixed(markdown);
           }
         });
         ctx.set(indentConfig.key, {

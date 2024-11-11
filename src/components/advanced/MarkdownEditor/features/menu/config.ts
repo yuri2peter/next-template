@@ -25,6 +25,7 @@ import {
   textIcon,
   todoListIcon,
   imageIcon,
+  editIcon,
 } from '../../icons';
 import type { MenuItemGroup } from './utils';
 import {
@@ -37,6 +38,8 @@ import {
 import { GroupBuilder } from './group-builder';
 import openUploadModal from '../uploadModal';
 import { getNodeByUploadedFile } from '../../utils';
+import openSourceModeModal from '../sourceModeModal';
+import { getMarkdown, replaceAll } from '@milkdown/kit/utils';
 
 export function getGroups(filter?: string) {
   const groupBuilder = new GroupBuilder();
@@ -176,7 +179,7 @@ export function getGroups(filter?: string) {
   groupBuilder
     .addGroup('advanced', 'Advanced')
     .addItem('code', {
-      label: 'Code',
+      label: 'Code Block',
       icon: codeIcon,
       onRun: (ctx) => {
         const view = ctx.get(editorViewCtx);
@@ -221,6 +224,19 @@ export function getGroups(filter?: string) {
           });
           const command = clearContentAndAddNode(node);
           command(state, dispatch);
+        });
+      },
+    })
+    .addItem('source', {
+      label: 'Source Mode',
+      icon: editIcon,
+      onRun: (ctx) => {
+        const view = ctx.get(editorViewCtx);
+        const { dispatch, state } = view;
+        dispatch(clearRange(state.tr));
+        const markdown = getMarkdown()(ctx);
+        openSourceModeModal(markdown, (newValue) => {
+          replaceAll(newValue)(ctx);
         });
       },
     });

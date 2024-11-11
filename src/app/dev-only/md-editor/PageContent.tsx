@@ -38,6 +38,7 @@ export default function PageContent({
       </div>
       <MarkdownCodemirror
         value={state.markdown}
+        onChangeDebounceDelay={500}
         onChange={(markdown) => {
           setState((draft) => {
             draft.markdown = markdown;
