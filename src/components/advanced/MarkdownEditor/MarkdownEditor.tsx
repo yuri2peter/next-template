@@ -7,6 +7,7 @@ import {
   editorViewOptionsCtx,
   rootCtx,
 } from '@milkdown/kit/core';
+import {} from '@milkdown/kit/utils';
 import { nord } from '@milkdown/theme-nord';
 import './styles/style.css';
 import { Milkdown, MilkdownProvider, useEditor } from '@milkdown/react';
@@ -34,13 +35,14 @@ import { defineToolbarFeature } from './features/toolbar';
 import { defineUploadFeature } from './features/upload';
 import { useRef } from 'react';
 import { debounce } from 'radash';
+import { createEditorActions, EditorActions } from './actionFactory';
 
 export type EditorProps = {
   defaultValue?: string;
   readonly?: boolean;
   onChange?: (markdown: string) => void;
   onChangeDebounceDelay?: number;
-  onEditorReady?: (editor: Editor) => void;
+  onEditorReady?: (ctrls: { editor: Editor; actions: EditorActions }) => void;
 };
 
 const MilkdownEditor = ({
@@ -57,7 +59,7 @@ const MilkdownEditor = ({
     onChangeDebounceDelay,
     readonly,
   });
-  Object.assign(refProps, {
+  Object.assign(refProps.current, {
     onChange,
     onEditorReady,
   });
@@ -113,7 +115,10 @@ const MilkdownEditor = ({
     defineMenuFeature(editor);
     defineToolbarFeature(editor);
     defineUploadFeature(editor);
-    refProps.current.onEditorReady?.(editor);
+    refProps.current.onEditorReady?.({
+      editor,
+      actions: createEditorActions(editor),
+    });
     return editor;
   });
   return <Milkdown />;

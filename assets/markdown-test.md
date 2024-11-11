@@ -4,9 +4,7 @@
 
 💭 You may wonder, what is Milkdown? Please write something here.
 
-> ⚠️ **Not the right side!**
->
-> Please try something on the left side.
+> Please try something on the both side.
 
 ![1.00](https://milkdown.dev/polar.jpeg 'Hello by a polar bear')
 

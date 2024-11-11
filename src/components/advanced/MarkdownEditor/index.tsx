@@ -3,6 +3,7 @@ import type { EditorProps } from './MarkdownEditor';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export type { Editor } from './MarkdownEditor';
+export type { EditorActions } from './actionFactory';
 export type { EditorProps };
 export const DynamicMarkdownEditor = dynamic(() => import('./MarkdownEditor'), {
   ssr: false,

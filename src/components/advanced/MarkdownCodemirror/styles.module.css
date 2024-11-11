@@ -1,0 +1,9 @@
+.editor {
+  :global(.cm-editor) {
+    background-color: #1e1e1e !important;
+  }
+  :global(.cm-scroller) {
+    font-family: var(--font-geist-sans) var(--font-geist-mono);
+    font-size: 14px;
+  }
+}
