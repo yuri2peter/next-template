@@ -1,4 +1,4 @@
-import CodeMirror from '@uiw/react-codemirror';
+import CodeMirror, { EditorView } from '@uiw/react-codemirror';
 import { keymap } from '@codemirror/view';
 import { defaultKeymap, indentWithTab } from '@codemirror/commands';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
@@ -8,17 +8,20 @@ import styles from './styles.module.css';
 import { cn } from '@/lib/utils';
 import { useMemo, useRef } from 'react';
 import { debounce } from 'radash';
+import { copilot } from './features/copilot';
 
 export default function MarkdownCodemirror({
   value,
   onChange,
   className,
   onChangeDebounceDelay = 0,
+  enableCopilot = false,
 }: {
   value: string;
   onChange?: (value: string) => void;
   className?: string;
   onChangeDebounceDelay?: number;
+  enableCopilot?: boolean;
 }) {
   const refOnChange = useRef(onChange);
   refOnChange.current = onChange;
@@ -41,9 +44,11 @@ export default function MarkdownCodemirror({
           allowMultipleSelections: false,
           indentOnInput: true,
         }),
+        EditorView.lineWrapping,
         keymap.of(defaultKeymap.concat(indentWithTab)),
         vscodeDark,
         loadLanguage('markdown')!,
+        enableCopilot ? copilot() : [],
       ]}
     />
   );

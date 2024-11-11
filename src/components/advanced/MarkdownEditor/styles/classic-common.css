@@ -4,6 +4,7 @@ div[data-milkdown-root='true'] {
 
 .milkdown {
   position: relative;
+  @apply mx-auto w-fit;
 
   .prose {
     max-width: calc(624px + 120px);

@@ -15,7 +15,7 @@ export const DynamicMarkdownEditor = dynamic(() => import('./MarkdownEditor'), {
 function SkeletonCard() {
   return (
     <div className="flex flex-col space-y-3 grow">
-      <div className="space-y-4 mx-[60px]">
+      <div className="space-y-4 mx-auto max-w-[624px] w-full">
         <Skeleton className="h-[125px] rounded-xl" />
         <Skeleton className="h-12 w-1/2" />
         <Skeleton className="h-8 w-full" />

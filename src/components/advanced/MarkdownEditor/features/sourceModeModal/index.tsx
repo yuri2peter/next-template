@@ -8,6 +8,8 @@ import {
 import { useRootLayer } from '@/components/ui/rootLayer';
 import { useImmer } from 'use-immer';
 
+const enableCopilot = false; // TODO get configs from user
+
 function Modal({
   defaultValue,
   onOpenChange,
@@ -30,8 +32,9 @@ function Modal({
           <DialogTitle>Source Mode</DialogTitle>
         </DialogHeader>
         <MarkdownCodemirror
-          className="max-h-[calc(100vh-200px)] w-full overflow-auto"
+          className="h-[calc(100vh-200px)] w-full overflow-auto"
           value={state.value}
+          enableCopilot={enableCopilot}
           onChangeDebounceDelay={500}
           onChange={(markdown) => {
             setState((draft) => {

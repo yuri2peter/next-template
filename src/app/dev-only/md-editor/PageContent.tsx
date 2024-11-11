@@ -6,7 +6,6 @@ import {
   EditorActions,
 } from '@/components/advanced/MarkdownEditor';
 import { useImmer } from 'use-immer';
-import MarkdownCodemirror from '@/components/advanced/MarkdownCodemirror';
 
 export default function PageContent({
   defaultValue,
@@ -20,12 +19,11 @@ export default function PageContent({
   });
   return (
     <main className="flex flex-row gap-4 w-full h-[calc(100vh-128px)] pr-12 overflow-auto ">
-      <div className="overflow-auto h-full grow min-w-[600px]">
+      <div className="overflow-auto h-full grow min-w-[600px] mx-auto">
         <DynamicMarkdownEditor
           defaultValue={defaultValue}
           readonly={state.readonly}
           onEditorReady={({ actions }) => {
-            console.log({ actions });
             editorActionsRef.current = actions;
           }}
           onChangeDebounceDelay={500}
@@ -36,17 +34,6 @@ export default function PageContent({
           }}
         />
       </div>
-      <MarkdownCodemirror
-        value={state.markdown}
-        onChangeDebounceDelay={500}
-        onChange={(markdown) => {
-          setState((draft) => {
-            draft.markdown = markdown;
-          });
-          editorActionsRef.current?.replaceAll(markdown);
-        }}
-        className="overflow-auto h-full min-w-[140px] shrink"
-      />
     </main>
   );
 }

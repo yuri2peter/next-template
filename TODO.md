@@ -1,4 +1,4 @@
-- Upload Modal
-  - paste link
-  - drag & drop
-  - upload file
+- Markdown Copilot
+  - get configs from user
+  - enable/disable in source mode modal
+- Better markdown example content
