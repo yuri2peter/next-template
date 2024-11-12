@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "build:standalone": "cross-env BUILD_TYPE=standalone next build",
+    "build:docker": "docker build -t my-app:latest .",
     "start": "next start",
     "lint": "next lint"
   },
@@ -104,6 +106,7 @@
     "@types/node": "^20",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "15.0.2",
     "postcss": "^8",

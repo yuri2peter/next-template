@@ -38,14 +38,6 @@ export default function Dropzone({
     const acceptFile = onShouldUpload(file);
     if (!acceptFile) return;
     try {
-      uploadFile({
-        file,
-        onProgressChange: (progress) => {
-          setState((draft) => {
-            draft.progress = progress;
-          });
-        },
-      });
       const abortController = new AbortController();
       setState((draft) => {
         draft.uploading = true;

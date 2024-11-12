@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function Error({
@@ -14,22 +15,18 @@ export default function Error({
         <h1 className="text-3xl mb-8">Ops! Something went wrong.</h1>
         <div className="flex gap-4">
           <p>
-            You can go back to the{' '}
-            <Link href="/" className="text-blue-500 underline">
-              home
-            </Link>{' '}
-            page or{' '}
-            <Link
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                reset();
-              }}
+            You can go back to the
+            <Button variant={null} className="text-blue-500 underline" asChild>
+              <Link href="/">home</Link>
+            </Button>
+            page or
+            <Button
+              variant={null}
               className="text-blue-500 underline"
+              onClick={() => reset()}
             >
               try again
-            </Link>{' '}
-            to the previous page.
+            </Button>
           </p>
         </div>
       </div>

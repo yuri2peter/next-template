@@ -1,0 +1,16 @@
+services:
+  my-app:
+    # image: my-app:latest
+    build:
+      context: ../../
+      dockerfile: ./deploy-docker/build/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./volumes/data-runtime:/app/data/runtime
+      - ./volumes/public-uploads:/app/public/uploads
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - ALLOW_UPLOAD=true
+      - ALLOW_DEV_ONLY_PAGES=true

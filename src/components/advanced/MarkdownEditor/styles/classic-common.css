@@ -197,6 +197,7 @@ div[data-milkdown-root='true'] {
       box-sizing: content-box;
       margin: 4px 0;
       border-inline-start-color: var(--crepe-color-selected);
+      color: var(--crepe-color-outline);
       /* &::before {
         content: '';
         width: 4px;

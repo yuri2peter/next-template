@@ -9,6 +9,7 @@ import duration from 'dayjs/plugin/duration';
 // import 'dayjs/locale/zh-cn';
 import './globals.css';
 import { RootLayerRenderer } from '@/components/ui/rootLayer';
+import { ThemeProvider } from '@/components/ui/theme-provider';
 
 enableMapSet();
 dayjs.extend(relativeTime);
@@ -17,12 +18,12 @@ dayjs.extend(isLeapYear);
 // dayjs.locale('zh-cn');
 
 const geistSans = localFont({
-  src: '../assets/fonts/GeistVF.woff',
+  src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',
   weight: '100 900',
 });
 const geistMono = localFont({
-  src: '../assets/fonts/GeistMonoVF.woff',
+  src: './fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
   weight: '100 900',
 });
@@ -38,13 +39,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.className} ${geistMono.className} antialiased`}
       >
-        <Toaster />
-        <RootLayerRenderer />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Toaster />
+          <RootLayerRenderer />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -3,26 +3,27 @@ import path from 'path';
 import fs from 'fs-extra';
 import busboy from 'busboy';
 import { shortId } from '@/lib/string';
-import { IS_DEV_SERVER } from '@/lib/server';
+import { ALLOW_UPLOAD, IS_DEV_SERVER } from '@/lib/server';
 import { ReadableStream } from 'stream/web';
 import { Readable } from 'stream';
+import { UPLOADS_PATH } from '@/lib/path';
 
 // upload file( only one file at a time )
 export async function POST(req: NextRequest) {
+  if (!(ALLOW_UPLOAD || IS_DEV_SERVER)) {
+    return NextResponse.json(
+      {
+        error: 'Not allowed based on server configuration',
+      },
+      { status: 403 }
+    );
+  }
   if (!req.body) {
     return NextResponse.json(
       {
         error: 'No body',
       },
       { status: 400 }
-    );
-  }
-  if (!IS_DEV_SERVER) {
-    return NextResponse.json(
-      {
-        error: 'Not allowed in production mode',
-      },
-      { status: 403 }
     );
   }
   const bb = busboy({
@@ -44,7 +45,7 @@ export async function POST(req: NextRequest) {
     const extname = path.extname(filename);
     const basename = path.basename(filename, extname);
     const newFilename = `${basename}-${shortId()}${extname}`;
-    const filePath = path.join(process.cwd(), 'public/uploads', newFilename);
+    const filePath = path.join(UPLOADS_PATH, newFilename);
     if (!result.filename) {
       fs.ensureFileSync(filePath);
       result.filename = newFilename;

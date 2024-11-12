@@ -1,4 +1,5 @@
-- Markdown Copilot
-  - get configs from user
-  - enable/disable in source mode modal
 - Better markdown example content
+- db
+- deploy with docker
+  - https://github.com/vercel/next.js/tree/canary/examples/with-docker
+  - public, user
