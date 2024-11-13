@@ -1,15 +1,15 @@
 import { redirect } from 'next/navigation';
-import { ALLOW_DEV_ONLY_PAGES, IS_DEV_SERVER } from '@/lib/server';
+import { IS_DEV_SERVER } from '@/lib/server';
 import DevOnlyNavLinks from './DevOnlyNavLinks';
 import Menu from './Menu';
 import { ModeToggle } from '@/components/ui/theme-mode-toggle';
 
-export default function DevOnlyLayout({
+export default async function DevOnlyLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  if (!(ALLOW_DEV_ONLY_PAGES || IS_DEV_SERVER)) {
+  if (!IS_DEV_SERVER) {
     return redirect('/');
   }
   return (

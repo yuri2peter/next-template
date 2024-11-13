@@ -3,14 +3,14 @@ import path from 'path';
 import fs from 'fs-extra';
 import busboy from 'busboy';
 import { shortId } from '@/lib/string';
-import { ALLOW_UPLOAD, IS_DEV_SERVER } from '@/lib/server';
+import { ALLOW_UPLOAD } from '@/lib/server';
 import { ReadableStream } from 'stream/web';
 import { Readable } from 'stream';
 import { UPLOADS_PATH } from '@/lib/path';
 
 // upload file( only one file at a time )
 export async function POST(req: NextRequest) {
-  if (!(ALLOW_UPLOAD || IS_DEV_SERVER)) {
+  if (!ALLOW_UPLOAD) {
     return NextResponse.json(
       {
         error: 'Not allowed based on server configuration',

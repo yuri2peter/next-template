@@ -4,6 +4,7 @@ export const metadata = {
   title: 'Page Template',
 };
 
-export default function Page() {
+export default async function Page() {
+  // await connection();
   return <PageContent />;
 }

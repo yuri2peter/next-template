@@ -1,5 +1,1 @@
 - Better markdown example content
-- db
-- deploy with docker
-  - https://github.com/vercel/next.js/tree/canary/examples/with-docker
-  - public, user

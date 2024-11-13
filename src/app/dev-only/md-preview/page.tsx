@@ -4,7 +4,7 @@ export const metadata = {
   title: 'Markdown Preview',
 };
 
-export default function Page() {
-  const text = getMarkdownExample();
+export default async function Page() {
+  const text = await getMarkdownExample();
   return <PageContent defaultValue={text} />;
 }

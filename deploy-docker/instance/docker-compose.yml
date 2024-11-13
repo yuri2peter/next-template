@@ -12,5 +12,3 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - ALLOW_UPLOAD=true
-      - ALLOW_DEV_ONLY_PAGES=true
