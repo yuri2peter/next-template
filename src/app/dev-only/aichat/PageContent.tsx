@@ -46,13 +46,13 @@ export default function PageContent() {
         },
         onmessage: (ev) => {
           const { data } = ev;
-          const { totalText, error } = JSON.parse(data);
+          const { completeText, error } = JSON.parse(data);
           if (error) {
             console.error(error);
           } else {
             setValue((draft) => {
               const lastChatLog = draft.history[draft.history.length - 1];
-              lastChatLog.model = totalText;
+              lastChatLog.model = completeText;
             });
             scrollChatLogs();
           }
@@ -166,10 +166,9 @@ export default function PageContent() {
                 <HelpCircle className="w-4 text-gray-500 cursor-pointer" />
               </HoverCardTrigger>
               <HoverCardContent className="text-sm">
-                <p className="font-bold">ENV variables are requierd</p>
-                <p>OPENAI_API_KEY</p>
-                <p>OPENAI_BASE_URL</p>
-                <p>OPENAI_MODEL</p>
+                <p className="font-bold">
+                  OpenAI API keys and base url are requierd
+                </p>
               </HoverCardContent>
             </HoverCard>
           </div>

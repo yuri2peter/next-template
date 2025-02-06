@@ -19,8 +19,8 @@ import { formTest } from './actions';
 import { Data, DataSchema } from './schema';
 import { CardContent, CardHeader } from '@/components/ui/card';
 import MarkdownPreview from '@/components/advanced/MarkdownPreview';
-import { useToast } from '@/hooks/use-toast';
 import { Checkbox } from '@/components/ui/checkbox';
+import { toast } from 'sonner';
 
 export default function PageContent() {
   const [result, setResult] = useState('Waiting for submit...');
@@ -34,24 +34,15 @@ export default function PageContent() {
       agree: true,
     },
   });
-  const { toast } = useToast();
   const onSubmit = (data: Data) => {
     setLoading(true);
     formTest(data)
       .then((res) => {
         setResult(JSON.stringify(res, null, 2));
-        toast({
-          title: 'Success',
-          description: 'Form submitted successfully',
-          variant: 'success',
-        });
+        toast('Form submitted successfully');
       })
       .catch((err) => {
-        toast({
-          title: 'Error',
-          description: err.message,
-          variant: 'destructive',
-        });
+        toast.error(err.message);
       })
       .finally(() => setLoading(false));
   };

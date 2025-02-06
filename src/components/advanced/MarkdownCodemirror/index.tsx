@@ -1,27 +1,30 @@
+import { aiEnhancer } from '@yuri2/codemirror-ai-enhancer';
+import '@yuri2/codemirror-ai-enhancer/styles.css';
 import CodeMirror, { EditorView } from '@uiw/react-codemirror';
 import { keymap } from '@codemirror/view';
 import { defaultKeymap, indentWithTab } from '@codemirror/commands';
-import { vscodeDark } from '@uiw/codemirror-theme-vscode';
+import { vscodeDark, vscodeLight } from '@uiw/codemirror-theme-vscode';
 import { loadLanguage } from '@uiw/codemirror-extensions-langs';
 import { basicSetup } from '@uiw/codemirror-extensions-basic-setup';
 import styles from './styles.module.css';
 import { cn } from '@/lib/utils';
 import { useMemo, useRef } from 'react';
-import { debounce } from 'radash';
-import { copilot } from './features/copilot';
+import { debounce } from 'radashi';
+import { aiEnhancerConfig } from './features/aiEnhancerConfig';
+import { useTheme } from 'next-themes';
 
 export default function MarkdownCodemirror({
   value,
   onChange,
   className,
   onChangeDebounceDelay = 0,
-  enableCopilot = false,
+  enableAiEnhancer = false,
 }: {
   value: string;
   onChange?: (value: string) => void;
   className?: string;
   onChangeDebounceDelay?: number;
-  enableCopilot?: boolean;
+  enableAiEnhancer?: boolean;
 }) {
   const refOnChange = useRef(onChange);
   refOnChange.current = onChange;
@@ -32,6 +35,7 @@ export default function MarkdownCodemirror({
     };
     return delay > 0 ? debounce({ delay }, handleChange) : handleChange;
   }, [onChangeDebounceDelay]);
+  const { theme } = useTheme();
   return (
     <CodeMirror
       value={value}
@@ -46,9 +50,9 @@ export default function MarkdownCodemirror({
         }),
         EditorView.lineWrapping,
         keymap.of(defaultKeymap.concat(indentWithTab)),
-        vscodeDark,
+        theme === 'dark' ? vscodeDark : vscodeLight,
         loadLanguage('markdown')!,
-        enableCopilot ? copilot() : [],
+        enableAiEnhancer ? aiEnhancer(aiEnhancerConfig) : [],
       ]}
     />
   );

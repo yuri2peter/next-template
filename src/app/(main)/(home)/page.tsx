@@ -1,9 +1,9 @@
 import PageContent from './PageContent';
 
 export const metadata = {
-  title: 'Upload',
+  title: 'Next.js App',
 };
 
-export default function Page() {
+export default async function MainPage() {
   return <PageContent />;
 }

@@ -112,3 +112,23 @@ export async function uploadFile({
     })
     .parse(data);
 }
+
+export async function remoteDownload(src: string) {
+  const res = await fetch('/api/file/remote-download', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      url: src,
+    }),
+  });
+  const data = await res.json();
+  return data as {
+    url: string;
+    filename: string;
+    ext: string;
+    contentType: string;
+    size: number;
+  };
+}

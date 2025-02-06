@@ -16,9 +16,18 @@ export function getCurrentTimeSeconds() {
 
 export function formatTime(
   date?: string | number | Date | dayjs.Dayjs | null | undefined,
-  format = 'MM/DD/YYYY, HH:mm'
+  format?: string
 ) {
   return dayjs(date).format(format);
+}
+
+export function smartFormatTime(date: string | number | Date | dayjs.Dayjs) {
+  const now = dayjs();
+  const diff = now.diff(date, 'day');
+  if (diff < 1) {
+    return dayjs(date).format('HH:mm');
+  }
+  return dayjs(date).format('MM/DD/YY');
 }
 
 /**

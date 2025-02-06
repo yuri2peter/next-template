@@ -34,7 +34,7 @@ import { defineMenuFeature, menuAPI } from './features/menu';
 import { defineToolbarFeature } from './features/toolbar';
 import { defineUploadFeature } from './features/upload';
 import { useRef } from 'react';
-import { debounce } from 'radash';
+import { debounce } from 'radashi';
 import { createEditorActions, EditorActions } from './actionFactory';
 
 export type EditorProps = {

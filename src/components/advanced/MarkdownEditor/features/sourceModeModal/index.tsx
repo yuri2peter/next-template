@@ -30,8 +30,9 @@ function Modal({
           <DialogTitle>Source Mode</DialogTitle>
         </DialogHeader>
         <MarkdownCodemirror
-          className="h-[calc(100vh-200px)] w-full overflow-auto"
+          className="max-h-[calc(100vh-200px)] min-h-[200px] w-full overflow-auto"
           value={state.value}
+          enableAiEnhancer
           onChangeDebounceDelay={500}
           onChange={(markdown) => {
             setState((draft) => {

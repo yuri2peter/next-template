@@ -24,7 +24,7 @@ export class BlockHandleView implements PluginView {
     this.#provider = new BlockProvider({
       ctx,
       content,
-      getOffset: () => 16,
+      getOffset: () => 8,
       getPlacement: ({ active, blockDom }) => {
         if (active.node.type.name === 'heading') return 'left';
 
@@ -67,9 +67,13 @@ export class BlockHandleView implements PluginView {
     if (!active) return;
 
     const $pos = active.$pos;
-    const pos = $pos.pos + active.node.nodeSize;
-    let tr = state.tr.insert(pos, paragraphSchema.type(ctx).create());
-    tr = tr.setSelection(TextSelection.near(tr.doc.resolve(pos)));
+    const posInsertAfter = $pos.pos + active.node.nodeSize;
+    // const posInsertBefore = $pos.pos;
+    let tr = state.tr.insert(
+      posInsertAfter,
+      paragraphSchema.type(ctx).create()
+    );
+    tr = tr.setSelection(TextSelection.near(tr.doc.resolve(posInsertAfter)));
     dispatch(tr.scrollIntoView());
 
     this.#provider.hide();

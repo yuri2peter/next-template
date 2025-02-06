@@ -21,7 +21,7 @@ export default function PageContent({
         <MarkdownCodemirror
           value={value}
           className="w-1/2 h-full overflow-auto"
-          enableCopilot
+          enableAiEnhancer
           onChange={(markdown) => {
             setValue(markdown);
           }}

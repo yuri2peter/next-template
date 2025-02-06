@@ -17,24 +17,32 @@ export type GenerateContent = (
 export type GenerateContentStream = (
   prompt: string,
   history: ChatHistory | undefined,
-  onUpdate: (totalText: string, chunkText: string) => void
+  onUpdate: (completeText: string, chunkText: string) => void
 ) => Promise<string>;
 
-function getChatModel() {
+export async function getAi() {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY is not set');
+  }
   const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey,
     baseURL: process.env.OPENAI_BASE_URL || undefined,
   });
   return openai;
+}
+
+export async function getAiModel() {
+  return process.env.OPENAI_LLM_MODEL || 'gpt-4o';
 }
 
 export const generateOpenaiContent: GenerateContent = async (
   prompt: string,
   history: ChatHistory = []
 ) => {
-  const openai = getChatModel();
+  const openai = await getAi();
   const completion = await openai.chat.completions.create({
-    model: process.env.OPENAI_MODEL || 'gpt-4o',
+    model: await getAiModel(),
     messages: [
       { role: 'system', content: 'You are a helpful assistant.' },
       ...historyTostartChatParams(history),
@@ -50,11 +58,11 @@ export const generateOpenaiContent: GenerateContent = async (
 export const generateOpenaiContentStream: GenerateContentStream = async (
   prompt: string,
   history: ChatHistory = [],
-  onUpdate: (totalText: string, chunkText: string) => void
+  onUpdate: (completeText: string, chunkText: string) => void
 ) => {
-  const openai = getChatModel();
+  const openai = await getAi();
   const stream = await openai.chat.completions.create({
-    model: process.env.OPENAI_MODEL || 'gpt-4o',
+    model: await getAiModel(),
     stream: true,
     messages: [
       { role: 'system', content: 'You are a helpful assistant.' },
@@ -73,6 +81,62 @@ export const generateOpenaiContentStream: GenerateContentStream = async (
   }
   return str;
 };
+
+export const generateOpenaiContentStreamWithSystemPrompt = async (
+  system: string,
+  user: string,
+  onUpdate: (completeText: string, chunkText: string) => void
+) => {
+  const openai = await getAi();
+  const stream = await openai.chat.completions.create({
+    model: await getAiModel(),
+    stream: true,
+    messages: [
+      { role: 'system', content: system },
+      {
+        role: 'user',
+        content: user,
+      },
+    ],
+  });
+  let str = '';
+  for await (const chunk of stream) {
+    const chunkText = chunk.choices[0]?.delta?.content || '';
+    str += chunkText;
+    onUpdate(str, chunkText);
+  }
+  return str;
+};
+
+export async function generateOpenaiJsonReply({
+  system,
+  user,
+}: {
+  system: string;
+  user: string;
+}) {
+  const ai = await getAi();
+  const model = await getAiModel();
+  const completion = await ai.chat.completions.create({
+    model,
+    response_format: { type: 'json_object' },
+    messages: [
+      {
+        role: 'system',
+        content:
+          system + '\n\nYou must reply with a JSON object, do not explain.',
+      },
+      { role: 'user', content: user },
+    ],
+  });
+  const content = completion.choices[0]!.message.content!;
+  const json = /\{[\s\S]*\}/.exec(content)?.[0];
+  if (!json) {
+    console.error('No JSON found in the response: ', content);
+    throw new Error('No JSON found in the response.');
+  }
+  return JSON.parse(json);
+}
 
 function historyTostartChatParams(
   history: ChatHistory

@@ -35,6 +35,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# dev container
+.devcontainer
+/dev-docker
+
 # runtime data
 /deploy-docker
 /data/runtime

@@ -25,7 +25,7 @@ export function getRandomString(length = 8) {
 // 连字符转驼峰
 export function hyphen2Camel(str: string) {
   const re = /-(\w)/g;
-  return str.replace(re, ($0, $1) => {
+  return str.replace(re, (_$0, $1) => {
     return $1.toUpperCase();
   });
 }
@@ -115,4 +115,41 @@ export function checkIsImageUrl(url: string) {
     '.tif',
   ];
   return checkList.some((t) => url.endsWith(t));
+}
+
+// 将一个字符串以逗号分割，再随机取出一项
+export function getRandomItemSplitByComma(str: string) {
+  return str.split(',').sort(() => Math.random() - 0.5)[0];
+}
+
+/**
+ * Fix relative links in the tag
+ * @param src - The src attribute of the tag
+ * @param pageUrl - The url of the page
+ * @returns The fixed src attribute
+ */
+export function fixRelativeLinks(src: string, pageUrl: string) {
+  const baseUrl = new URL(pageUrl).origin;
+  if (src.startsWith('#')) {
+    return new URL(src, pageUrl).href;
+  }
+  // Check if src is a valid URL
+  try {
+    new URL(src, baseUrl);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
+    return src;
+  }
+  try {
+    // Check if src is already an absolute path
+    if (src.startsWith('http://') || src.startsWith('https://')) {
+      return src; // src is already an absolute path, return as is
+    }
+
+    // Extract the base part of href and calculate the absolute path based on src and base
+    return new URL(src, pageUrl).href;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
+    return src;
+  }
 }

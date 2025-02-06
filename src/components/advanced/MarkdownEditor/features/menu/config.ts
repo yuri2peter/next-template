@@ -37,8 +37,8 @@ import {
 } from './utils';
 import { GroupBuilder } from './group-builder';
 import openUploadModal from '../uploadModal';
-import { getNodeByUploadedFile } from '../../utils';
 import openSourceModeModal from '../sourceModeModal';
+import { getNodeByUploadedFile } from '../../utils';
 import { getMarkdown, replaceAll } from '@milkdown/kit/utils';
 
 export function getGroups(filter?: string) {

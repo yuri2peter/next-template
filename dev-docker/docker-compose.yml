@@ -1,0 +1,10 @@
+services:
+  dev-knowlink:
+    build:
+      context: ../
+      dockerfile: ./dev-docker/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 2222:22
+    volumes:
+      - ../:/app

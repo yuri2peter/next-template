@@ -21,6 +21,7 @@ export default function PageContent() {
             setValue(v);
           }}
         />
+        <pre>{JSON.stringify(value)}</pre>
         <CanvasAnimatedGradientBackground {...value} />
       </div>
     </>

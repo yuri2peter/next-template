@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import type { EditorProps } from './MarkdownEditor';
 import { createContext, useContext } from 'react';

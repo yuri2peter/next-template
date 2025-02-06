@@ -3,20 +3,16 @@ import path from 'path';
 import fs from 'fs-extra';
 import busboy from 'busboy';
 import { shortId } from '@/lib/string';
-import { ALLOW_UPLOAD } from '@/lib/server';
 import { ReadableStream } from 'stream/web';
 import { Readable } from 'stream';
 import { UPLOADS_PATH } from '@/lib/path';
+import { authCheck } from '../../authCheck';
 
 // upload file( only one file at a time )
 export async function POST(req: NextRequest) {
-  if (!ALLOW_UPLOAD) {
-    return NextResponse.json(
-      {
-        error: 'Not allowed based on server configuration',
-      },
-      { status: 403 }
-    );
+  const authRes = await authCheck(req);
+  if (authRes) {
+    return authRes;
   }
   if (!req.body) {
     return NextResponse.json(
@@ -39,7 +35,7 @@ export async function POST(req: NextRequest) {
     url: '',
   };
 
-  bb.on('file', (name, file, info) => {
+  bb.on('file', (_name, file, info) => {
     // somehow the filename is encoded in latin1
     const filename = Buffer.from(info.filename, 'latin1').toString('utf8');
     const extname = path.extname(filename);

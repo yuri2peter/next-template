@@ -1,13 +1,18 @@
-import { guard } from 'radash';
+import { guard } from 'radashi';
 import { NextRequest, NextResponse } from 'next/server';
 import { generateOpenaiContent, generateOpenaiContentStream } from '@/lib/ai';
 import { ChatHistorySchema } from '@/lib/ai';
 import { z } from 'zod';
 import { zodSafeType, zodSafeBoolean } from '@/lib/zod';
+import { authCheck } from '../../authCheck';
 
 export const maxDuration = 60; // for vercel hosting
 
 export async function POST(req: NextRequest) {
+  const authRes = await authCheck(req);
+  if (authRes) {
+    return authRes;
+  }
   const body = await guard(() => req.json());
   const parsedBody = z
     .object({
@@ -39,10 +44,10 @@ export async function POST(req: NextRequest) {
     generateOpenaiContentStream(
       prompt,
       history,
-      async (totalText, chunkText) => {
+      async (completeText, chunkText) => {
         await writer.write(
           new TextEncoder().encode(
-            `data: ${JSON.stringify({ totalText, chunkText })}\n\n`
+            `data: ${JSON.stringify({ completeText, chunkText })}\n\n`
           )
         );
       }
