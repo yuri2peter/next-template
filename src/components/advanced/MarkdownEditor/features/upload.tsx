@@ -20,7 +20,6 @@ export function defineUploadFeature(editor: Editor) {
               url,
               schema,
             });
-            nodes.push(schema.text(' '));
             nodes.push(node);
             nodes.push(schema.text(' '));
           }
