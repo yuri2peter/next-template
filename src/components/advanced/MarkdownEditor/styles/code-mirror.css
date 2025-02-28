@@ -1,6 +1,6 @@
 .milkdown {
   .cm-scroller {
-    font-family: var(--font-geist-sans) var(--font-geist-mono);
+    font-family: inherit !important;
     font-size: 14px;
   }
   milkdown-code-block {

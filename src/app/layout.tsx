@@ -1,7 +1,7 @@
 import './globals.css';
+import '@chinese-fonts/lxgwwenkai/dist/LXGWWenKai-Regular/result.css';
 // import 'animate.css'; // has conflict with tailwind animate-pulse
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import { Toaster } from 'sonner';
 import { enableMapSet } from 'immer';
 import dayjs from 'dayjs';
@@ -21,17 +21,6 @@ dayjs.extend(duration);
 dayjs.extend(isLeapYear);
 // dayjs.locale('zh-cn');
 
-const geistSans = localFont({
-  src: '../fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: '../fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-});
-
 export const metadata: Metadata = {
   title: 'next-template',
   icons: {
@@ -47,9 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.className} ${geistMono.className} antialiased dark:bg-gray-900`}
-      >
+      <body className={`antialiased dark:bg-gray-900`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TooltipProvider>
             <Toaster position="top-center" />

@@ -19,7 +19,7 @@
   --crepe-color-selected: #e1e2e8;
   --crepe-color-inline-area: #d8dae0;
 
-  --font-body: geistMono, 'geistMono Fallback';
+  --font-body: inherit;
   --crepe-font-title: var(--font-body);
   --crepe-font-default: var(--font-body);
   --crepe-font-code: var(--font-body);
