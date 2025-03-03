@@ -1,5 +1,7 @@
 import md5 from 'md5';
 import { nanoid } from 'nanoid';
+import { countTokens } from 'gpt-tokenizer';
+import numbro from 'numbro';
 
 // 检查字符串是否是以某些字符开头,支持传入除外列表
 // 如 startsWith('abc', ['a']) === true
@@ -152,4 +154,19 @@ export function fixRelativeLinks(src: string, pageUrl: string) {
   } catch (e) {
     return src;
   }
+}
+
+export function truncateTextByTokens(text: string, maxTokens: number) {
+  const length = text.length;
+  const tokens = countTokens(text);
+  if (tokens > maxTokens) {
+    const ratio = maxTokens / tokens;
+    const newLength = Math.floor(length * ratio);
+    return text.slice(0, newLength);
+  }
+  return text;
+}
+
+export function formatLargeNumber(num: number) {
+  return numbro(num).format({ average: true, mantissa: 2, trimMantissa: true });
 }
