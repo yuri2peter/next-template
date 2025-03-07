@@ -25,7 +25,7 @@ export default function TagInputAutocomplete({
 } & React.ComponentPropsWithoutRef<'input'>) {
   // const refInput = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState('');
-  const value1 = useMemo(() => unique(value), [value]);
+  const value1 = useMemo(() => unique(value as string[]), [value]);
   const options1 = useMemo(
     () => unique(autocompleteOptions),
     [autocompleteOptions]

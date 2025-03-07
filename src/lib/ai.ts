@@ -108,7 +108,7 @@ export const generateOpenaiContentStreamWithSystemPrompt = async (
   return str;
 };
 
-export async function generateOpenaiJsonReply({
+export async function generateOpenaiJsonReply<T extends object>({
   system,
   user,
 }: {
@@ -135,7 +135,7 @@ export async function generateOpenaiJsonReply({
     console.error('No JSON found in the response: ', content);
     throw new Error('No JSON found in the response.');
   }
-  return JSON.parse(json);
+  return JSON.parse(json) as T;
 }
 
 function historyTostartChatParams(

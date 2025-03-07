@@ -14,7 +14,7 @@ function handleCompletion(prompt: string, onTextChange: TextChangeHandler) {
     },
     body: JSON.stringify({ prompt, stream: true }),
     onmessage: (event) => {
-      const data = JSON.parse(event.data);
+      const data = JSON.parse(event.data) as { completeText: string };
       onTextChange(data.completeText);
     },
   }).catch(() => {

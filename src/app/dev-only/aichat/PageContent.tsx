@@ -46,7 +46,10 @@ export default function PageContent() {
         },
         onmessage: (ev) => {
           const { data } = ev;
-          const { completeText, error } = JSON.parse(data);
+          const { completeText, error } = JSON.parse(data) as {
+            completeText: string;
+            error: string;
+          };
           if (error) {
             console.error(error);
           } else {
@@ -86,7 +89,7 @@ export default function PageContent() {
         .then((json) => {
           setValue((draft) => {
             const lastChatLog = draft.history[draft.history.length - 1];
-            lastChatLog.model = json.result;
+            lastChatLog.model = (json as { result: string }).result;
           });
           scrollChatLogs();
         })

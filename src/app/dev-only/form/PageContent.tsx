@@ -42,7 +42,7 @@ export default function PageContent() {
         toast('Form submitted successfully');
       })
       .catch((err) => {
-        toast.error(err.message);
+        toast.error((err as Error).message);
       })
       .finally(() => setLoading(false));
   };

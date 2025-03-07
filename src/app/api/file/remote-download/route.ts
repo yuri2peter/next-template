@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   if (authRes) {
     return authRes;
   }
-  const { url } = await req.json();
+  const { url } = (await req.json()) as { url: string };
   if (!url) {
     return NextResponse.json({ error: 'No url' }, { status: 400 });
   }

@@ -46,7 +46,7 @@ export async function imageSearchByAi(
       images.push(...apiResults.slice(0, 16));
     })
   );
-  const { imageIds } = await generateOpenaiJsonReply({
+  const { imageIds } = await generateOpenaiJsonReply<{ imageIds: string[] }>({
     system: `
 You are a helpful assistant that can help me find the best images for my content.
 Select images to match the content, no more than 16.

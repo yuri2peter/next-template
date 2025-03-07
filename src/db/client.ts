@@ -1,5 +1,5 @@
 import { DB_ORIGIN } from './defines';
-export async function getItem(name: string, id = '') {
+export async function getItem<T>(name: string, id = '') {
   const res = await fetch(`${DB_ORIGIN}/${name}` + (id ? `/${id}` : ''));
   if (!res.ok) {
     if (res.status === 404) {
@@ -8,16 +8,16 @@ export async function getItem(name: string, id = '') {
     throw new Error(`Failed to fetch ${name}/${id}: ${res.statusText}`);
   }
   const item = await res.json();
-  return item;
+  return item as T;
 }
 
-export async function getItems(name: string) {
+export async function getItems<T>(name: string) {
   const res = await fetch(`${DB_ORIGIN}/${name}`);
   if (!res.ok) {
     throw new Error(`Failed to fetch ${name}: ${res.statusText}`);
   }
   const items = await res.json();
-  return items;
+  return items as T[];
 }
 
 export async function createItem<T>(name: string, item: T) {
@@ -31,8 +31,8 @@ export async function createItem<T>(name: string, item: T) {
   if (!res.ok) {
     throw new Error(`Failed to create ${name}: ${res.statusText}`);
   }
-  const createdItem: T = await res.json();
-  return createdItem;
+  const createdItem = await res.json();
+  return createdItem as T;
 }
 
 export async function updateItem<T>(
@@ -50,11 +50,11 @@ export async function updateItem<T>(
   if (!res.ok) {
     throw new Error(`Failed to update ${name}/${id}: ${res.statusText}`);
   }
-  const updatedItem: T = await res.json();
-  return updatedItem;
+  const updatedItem = await res.json();
+  return updatedItem as T;
 }
 
-export async function deleteItem(name: string, id: string) {
+export async function deleteItem<T>(name: string, id: string) {
   const res = await fetch(`${DB_ORIGIN}/${name}/${id}`, {
     method: 'DELETE',
   });
@@ -62,7 +62,7 @@ export async function deleteItem(name: string, id: string) {
     throw new Error(`Failed to delete ${name}/${id}: ${res.statusText}`);
   }
   const deletedItem = await res.json();
-  return deletedItem;
+  return deletedItem as T;
 }
 
 export async function deleteItems(name: string, ids: string[]) {
