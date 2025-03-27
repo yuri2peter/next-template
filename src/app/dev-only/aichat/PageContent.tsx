@@ -9,7 +9,8 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card';
 import { Textarea } from '@/components/ui/textarea';
-import type { ChatHistory } from '@/lib/ai';
+import { Dialogues } from '@/lib/ai/text/defines';
+import { dialoguesToChatMessages } from '@/lib/ai/text/utils';
 import { fetchEventSource } from '@/lib/fetchEventSource';
 import { scrollToBottom } from '@/lib/visual';
 import { HelpCircle } from 'lucide-react';
@@ -22,7 +23,7 @@ export default function PageContent() {
   const [value, setValue] = useImmer({
     prompt: '',
     stream: true,
-    history: [] as ChatHistory,
+    dialogues: [] as Dialogues,
     fetching: false,
   });
   const canSend = !value.fetching && value.prompt.trim().length > 0;
@@ -38,7 +39,7 @@ export default function PageContent() {
         method: 'POST',
         body: JSON.stringify({
           prompt: value.prompt,
-          history: value.history,
+          chatHistory: dialoguesToChatMessages(value.dialogues),
           stream: value.stream,
         }),
         headers: {
@@ -54,8 +55,8 @@ export default function PageContent() {
             console.error(error);
           } else {
             setValue((draft) => {
-              const lastChatLog = draft.history[draft.history.length - 1];
-              lastChatLog.model = completeText;
+              const lastChatLog = draft.dialogues[draft.dialogues.length - 1];
+              lastChatLog.assistant = completeText;
             });
             scrollChatLogs();
           }
@@ -69,9 +70,9 @@ export default function PageContent() {
       });
       setValue((draft) => {
         draft.fetching = true;
-        draft.history.push({
+        draft.dialogues.push({
           user: value.prompt,
-          model: 'AI is thinking...',
+          assistant: 'AI is thinking...',
         });
         draft.prompt = '';
       });
@@ -81,15 +82,15 @@ export default function PageContent() {
         method: 'POST',
         body: JSON.stringify({
           prompt: value.prompt,
-          history: value.history,
+          chatHistory: dialoguesToChatMessages(value.dialogues),
           stream: value.stream,
         }),
       })
         .then((res) => res.json())
         .then((json) => {
           setValue((draft) => {
-            const lastChatLog = draft.history[draft.history.length - 1];
-            lastChatLog.model = (json as { result: string }).result;
+            const lastChatLog = draft.dialogues[draft.dialogues.length - 1];
+            lastChatLog.assistant = (json as { result: string }).result;
           });
           scrollChatLogs();
         })
@@ -100,9 +101,9 @@ export default function PageContent() {
         });
       setValue((draft) => {
         draft.fetching = true;
-        draft.history.push({
+        draft.dialogues.push({
           user: value.prompt,
-          model: 'AI is thinking...',
+          assistant: 'AI is thinking...',
         });
         draft.prompt = '';
       });
@@ -119,13 +120,13 @@ export default function PageContent() {
           ref={refChatLogsBox}
           className="max-h-[600px] overflow-auto flex flex-col gap-6"
         >
-          {value.history.map((chatLog, index) => (
+          {value.dialogues.map((chatLog, index) => (
             <React.Fragment key={index}>
               <MarkdownPreview className="text-amber-700">
                 {chatLog.user}
               </MarkdownPreview>
               <MarkdownPreview className="text-gray-600">
-                {chatLog.model}
+                {chatLog.assistant}
               </MarkdownPreview>
             </React.Fragment>
           ))}
